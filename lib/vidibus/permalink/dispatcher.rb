@@ -9,6 +9,7 @@ module Vidibus
       def initialize(path, options = {})
         self.path = path
         @scope = options[:scope]
+        @sanitized_domain = ::Permalink.sanitize(options[:domain])
       end
 
       # Returns the path to dispatch.
@@ -60,7 +61,18 @@ module Vidibus
       private
 
       def resolve_path
-        results = ::Permalink.for_scope(@scope).any_in(value: parts)
+        if @sanitized_domain
+          if parts.length > 1
+            # prepend multiple parts with sanitized_domain except for last which represents an asset
+            domain_parts = parts.each_with_index.map {|p, i| i < (parts.length - 1) ? [@sanitized_domain, p].compact.join('-') : p }
+          else
+            domain_part = parts.map {|p| [@sanitized_domain, p].compact.join('-')}
+          end
+          results = ::Permalink.for_scope(@scope).any_in(value: domain_parts || domain_part)
+        else
+          results = ::Permalink.for_scope(@scope).any_in(value: parts)
+        end
+
         links = Array.new(parts.length)
         done = {}
         for result in results
