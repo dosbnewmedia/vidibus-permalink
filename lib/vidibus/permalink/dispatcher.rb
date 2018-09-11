@@ -65,14 +65,18 @@ module Vidibus
           if parts.length > 1
             # prepend multiple parts with sanitized_domain except for last which represents an asset
             domain_parts = parts.each_with_index.map {|p, i| i < (parts.length - 1) ? [@sanitized_domain, p].compact.join('-') : p }
+            Rails.logger.error "domain_parts: #{domain_parts.inspect}"
           else
             domain_part = parts.map {|p| [@sanitized_domain, p].compact.join('-')}
+            Rails.logger.error "domain_part: #{domain_part.inspect}"
           end
           results = ::Permalink.for_scope(@scope).any_in(value: domain_parts || domain_part)
         else
+          Rails.logger.error "parts: #{parts.inspect}"
           results = ::Permalink.for_scope(@scope).any_in(value: parts)
         end
-
+        Rails.logger.error "@sanitized_domain: #{@sanitized_domain}"
+        Rails.logger.error "results: #{results.inspect}"
         links = Array.new(parts.length)
         done = {}
         for result in results
