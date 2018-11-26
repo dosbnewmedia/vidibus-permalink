@@ -1,5 +1,8 @@
 rvm:
   - 1.9.3
+  - 2.3
+  - 2.4
+  - 2.5
 script: 'bundle exec rspec spec --format progress'
 services: mongodb
 before_install:
