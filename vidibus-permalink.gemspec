@@ -15,15 +15,15 @@ Gem::Specification.new do |s|
   s.description = 'Allows changeable permalinks (good for SEO).'
   s.license = 'MIT'
 
-  s.required_rubygems_version = '>= 1.3.6'
+  s.required_rubygems_version = '>= 3'
 
-  s.add_dependency 'activesupport', '>= 3'
-  s.add_dependency 'mongoid', '~> 6'
+  s.add_dependency 'activesupport', '>= 6'
+  s.add_dependency 'mongoid', '~> 7'
   s.add_dependency 'vidibus-core_extensions'
   s.add_dependency 'vidibus-words'
 
   s.add_development_dependency 'bundler', '>= 1.0.0'
-  s.add_development_dependency 'rspec', '~> 2'
+  s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'rr'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc', '~> 3.4'
