@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', '>= 6'
   s.add_dependency 'mongoid', '~> 7'
-  # s.add_dependency 'vidibus-core_extensions', github: "dosbnewmedia/vidibus-core_extensions", branch: 'mongoid-7'
+  s.add_dependency 'vidibus-core_extensions'
   s.add_dependency 'vidibus-words'
 
   s.add_development_dependency 'bundler', '>= 1.0.0'
